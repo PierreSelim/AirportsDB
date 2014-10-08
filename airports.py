@@ -4,9 +4,16 @@ import pywikibot.data.wikidataquery as pwq
 import json
 
 def item_from_id(repo, identifier):
+    """ Get item from its ID.
+    
+    Args:
+        repo: data repository of the site.
+        identifier (int): ID of an item (eg. 120 for Q120)
+    """
     return pywikibot.ItemPage(repo, "Q%s" % identifier)
 
 def fetch_property_values(item, prop):
+    """ Fetch a property from an item. """
     target = None
     if prop in item.claims:
         claim = item.claims[prop][0] 
@@ -14,7 +21,17 @@ def fetch_property_values(item, prop):
     return target
 
 class Airport:
+    """ Object to represent an airport and its data. """
+    
     def __init__(self, iata=None, icao=None, en=None, geo=None):
+    """ Constructor of airport.
+    
+    Args:
+        iata (str): IATA code of the Airport (P238)
+        icao (str): ICAO code of the Airport (P239)
+        en (str): Name of the english wikipedia article about the airport
+        geo (str): lat, long of the airport.
+    """
         self.values = {
             'iata': iata,
             'icao': icao,
