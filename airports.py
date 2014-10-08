@@ -23,25 +23,26 @@ def fetch_property_values(item, prop):
 class Airport:
     """ Object to represent an airport and its data. """
     
-    def __init__(self, iata=None, icao=None, en=None, geo=None):
-    """ Constructor of airport.
-    
-    Args:
-        iata (str): IATA code of the Airport (P238)
-        icao (str): ICAO code of the Airport (P239)
-        en (str): Name of the english wikipedia article about the airport
-        geo (str): lat, long of the airport.
-    """
+    def __init__(self, iata=None, icao=None, en=None, geo=None, country=None):
+        """ Constructor of airport.
+        
+        Args:
+            iata (str): IATA code of the Airport (P238)
+            icao (str): ICAO code of the Airport (P239)
+            en (str): Name of the english wikipedia article about the airport
+            geo (str): lat, long of the airport.
+        """
         self.values = {
             'iata': iata,
             'icao': icao,
             'en': en,
-            'geo': geo
+            'geo': geo,
+            'country': country
             }
 
     def __repr__(self):
         """ string to for print. """
-        vals = [self.values['iata'], self.values['icao'], self.values['en'], self.values['geo']]
+        vals = [self.values['iata'], self.values['icao'], self.values['en'], self.values['geo'], self.values['country']]
         display_vals = ['' if v is None else v for v in vals]
         return u';'.join(display_vals).encode('utf-8')
         
@@ -87,6 +88,7 @@ def main():
             airport = Airport(iata=fetch_property_values(item, 'P238'),
                     icao= fetch_property_values(item, 'P239'),
                     geo= "%s, %s" % (latitude, longitude),
+                    country=fetch_property_values(item, 'P17'),
                     en=name)
             output.write(repr(airport)+'\n')
     
