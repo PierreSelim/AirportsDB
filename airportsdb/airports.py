@@ -5,7 +5,7 @@ import pywikibot.data.wikidataquery as pwq
 
 
 def item_from_id(repo, identifier):
-    """ Get item from its ID.
+    """Get item from its ID.
 
     Args:
         repo: data repository of the site.
@@ -15,7 +15,7 @@ def item_from_id(repo, identifier):
 
 
 def fetch_property_values(item, prop):
-    """ Fetch a property from an item. """
+    """Fetch a property from an item."""
     target = None
     if prop in item.claims:
         claim = item.claims[prop][0]
@@ -25,10 +25,10 @@ def fetch_property_values(item, prop):
 
 class Airport(object):
 
-    """ Object to represent an airport and its data. """
+    """Object to represent an airport and its data."""
 
     def __init__(self, iata=None, icao=None, en=None, geo=None, country=None):
-        """ Constructor of airport.
+        """Constructor of airport.
 
         Args:
             iata (str): IATA code of the Airport (P238)
@@ -45,7 +45,7 @@ class Airport(object):
         }
 
     def __repr__(self):
-        """ string to for print. """
+        """string to for print."""
         vals = [self.values['iata'],
                 self.values['icao'],
                 self.values['en'],
@@ -56,7 +56,7 @@ class Airport(object):
 
 
 def main():
-    """ Main script of airport dabatase creation. """
+    """Main script of airport dabatase creation."""
     from argparse import ArgumentParser
 
     parser = ArgumentParser(description="Airport DB")
